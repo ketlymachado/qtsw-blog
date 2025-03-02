@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog de QTSW</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            h1 {
+                color: #333;
+            }
+            #posts {
+                margin-top: 20px;
+            }
+            .post {
+                background: #f4f4f4;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                min-height: 50px;
+            }
+            .post-content {
+                flex-grow: 1;
+            }
+            .post-actions {
+                display: flex;
+                gap: 10px;
+            }
+            .edit-button, .delete-button {
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .edit-button {
+                background: #ffc107;
+                color: black;
+            }
+            .edit-button:hover {
+                background: #e0a800;
+            }
+            .delete-button {
+                background: #dc3545;
+                color: white;
+            }
+            .delete-button:hover {
+                background: #c82333;
+            }
+            .edit-form {
+                display: none;
+                flex-grow: 1;
+            }
+            .edit-form input {
+                padding: 5px;
+                width: 200px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                flex-grow: 1;
+            }
+            .edit-form button {
+                padding: 5px 10px;
+                background: #28a745;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .edit-form button:hover {
+                background: #218838;
+            }      
+            .edit-form .cancel-button {
+                background: #6c757d;
+            }
+            .edit-form .cancel-button:hover {
+                background: #5a6268;
+            }
+            form:not(.edit-form) {
+                margin-top: 20px;
+            }
+            input[type="text"] {
+                padding: 10px;
+                width: 300px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            button {
+                padding: 10px 20px;
+                background: #28a745;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background: #218838;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Blog de QTSW</h1>
+
+        <form id="postForm">
+            <input type="text" id="content" placeholder="Digite sua postagem" required>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <div id="posts">
+            <!-- posts will be dynamically inserted here -->
+        </div>
+
+        <script>
+            async function fetchPosts() {
+                const response = await fetch('/posts');
+                const posts = await response.json();
+                const postsContainer = document.getElementById('posts');
+                postsContainer.innerHTML = '';
+                posts.forEach(post => {
+                    let postElement = document.createElement('div')
+                    postElement.className = 'post'
+                    postElement.innerHTML = `
+                        <div class="post-content">
+                            <span>${post.content}</span>
+                        </div>
+                        <div class="post-actions">
+                            <button class="edit-button" data-id="${post.id}">Editar</button>
+                            <button class="delete-button" data-id="${post.id}">Remover</button>
+                        </div>
+                        <form class="edit-form" data-id="${post.id}">
+                            <input type="text" value="${post.content}" required>
+                            <button type="submit" style="margin: 0 10px;">Salvar</button>
+                            <button type="button" class="cancel-button">Cancelar</button>
+                        </form>
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+
+                document.querySelectorAll('.delete-button').forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        await deletePost(id);
+                    });
+                });
+
+                document.querySelectorAll('.edit-button').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const postElement = e.target.closest('.post');
+                        const postContent = postElement.querySelector('.post-content');
+                        const editForm = postElement.querySelector('.edit-form');
+
+                        postContent.style.display = 'none';
+                        postElement.querySelector('.post-actions').style.display = 'none';
+                        editForm.style.display = 'flex';
+                    });
+                });
+
+                document.querySelectorAll('.edit-form').forEach(form => {
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const id = form.getAttribute('data-id');
+                        const input = form.querySelector('input');
+                        const content = input.value;
+                        if (content) await updatePost(id, content)
+                    });
+
+                    form.querySelector('.cancel-button').addEventListener('click', () => {
+                        const postElement = form.closest('.post');
+                        const postContent = postElement.querySelector('.post-content');
+                        let editForm = postElement.querySelector('.edit-form');
+
+                        editForm.style.display = 'none';
+                        postContent.style.display = 'block'
+                        postElement.querySelector('.post-actions').style.display = 'flex';
+                    });
+                });
+            }
+
+            async function addPost(content) {
+                const response = await fetch('/posts', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ content })
+                });
+
+                if (response.ok) {
+                    fetchPosts();
+                }
+            }
+
+            async function updatePost(id, content) {
+                const response = await fetch(`/posts/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ content }),
+                });
+
+                if (response.ok) {
+                    fetchPosts();
+                }
+            }
+
+            async function deletePost(id) {
+                const response = await fetch(`/posts/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) fetchPosts()
+            }
+
+            document.getElementById('postForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const content = document.getElementById('content').value;
+                if (content) {
+                    await addPost(content);
+                    document.getElementById('content').value = '';
+                }
+            });
+
+            fetchPosts()
+        </script>
+    </body>
+</html>
