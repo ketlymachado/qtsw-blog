@@ -9,8 +9,11 @@ export default [
   {files: ["**/*.{js,mjs,cjs,ts}"]},
   {
     plugins: {
-      '@stylistic/ts': stylisticTs
+      '@stylistic/ts': stylisticTs, 
+      unicorn,
+
     },
+    
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
