@@ -14,6 +14,7 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      'no-unused-vars': ["warn"], 
     }
   },
   pluginJs.configs.recommended,
