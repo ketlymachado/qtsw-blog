@@ -71,4 +71,12 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
+// exemplo de erro da minha regra
+function exemplo() {
+    const nome = 'pamela';
+    if (nome === 'pamela') {
+        console.log('Olá, pamela!');
+    }
+}
+
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
