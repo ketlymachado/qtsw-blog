@@ -71,4 +71,10 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
+//exemplo da regra de função vazia do eslint
+function funcaovazia() {
+  
+};
+funcaovazia();
+
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
