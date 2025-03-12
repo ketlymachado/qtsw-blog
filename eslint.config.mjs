@@ -13,7 +13,8 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],  // Garante ponto e vírgula obrigatório
-      "no-console": ["error", { allow: ["warn", "error"] }]  // Proíbe console.log(), mas permite console.warn() e console.error()
+      "no-console": ["error", { allow: ["warn", "error"] }],  // Proíbe console.log(), mas permite console.warn() e console.error()
+      "no-shadow": "error"
     }
   },
   pluginJs.configs.recommended,
