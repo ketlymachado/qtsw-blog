@@ -14,6 +14,9 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      '@stylistic/ts/lines-around-comment': ["error", { "beforeLineComment": true }],
+      '@stylistic/ts/no-extra-parens': ["error", "all", { "conditionalAssign": false }],
+
     }
   },
   pluginJs.configs.recommended,

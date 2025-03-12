@@ -18,7 +18,7 @@ app.get('/posts', async (req, res) => {
         res.status(500).json({ error: 'Failed to retrieve posts' });
     }
 });
-
+/**este metodo cria um post */
 app.post('/posts', async (req, res) => {
     const content = req.body.content;
 
@@ -33,7 +33,7 @@ app.post('/posts', async (req, res) => {
         });
         res.status(201).json(post);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to add post' });
+        res.status((500)).json({ error: 'Failed to add post' });
     }
 });
 
@@ -72,3 +72,5 @@ app.delete('/posts/:id', async (req, res: Response) => {
 });
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+
+const resultado: number = (10 + 5); // Erro: esses parênteses desnecessarios
