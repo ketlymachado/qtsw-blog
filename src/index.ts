@@ -71,4 +71,15 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
+const user = {
+    name: null,
+  };
+
+  const numbers = [1, 2, 3, 4];
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i]);
+}
+
+
+
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
