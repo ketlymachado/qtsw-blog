@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.get('/posts', async (req, res) => {
     try {
         let posts = await prisma.post.findMany();
+        let posts = [];
         res.json(posts);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve posts' });
@@ -70,5 +71,6 @@ app.delete('/posts/:id', async (req, res: Response) => {
         res.status(500).json({ error: 'Failed to delete post' });
     }
 });
+
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
