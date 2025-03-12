@@ -47,11 +47,11 @@ app.put('/posts/:id', async (req: Request, res: Response) => {
     }
   
     try {
-        const updatedpost = await prisma.post.update({
+        const updated_post = await prisma.post.update({
             where: { id: parseInt(id) },
             data: { content }
         });
-        res.json(updatedpost);
+        res.json(updated_post);
     } catch (error) {
         console.error('Error updating post:', error);
         res.status(500).json({ error: 'Failed to update post' });
