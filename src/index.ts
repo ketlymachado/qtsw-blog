@@ -18,7 +18,7 @@ app.get('/posts', async (req, res) => {
         res.status(500).json({ error: 'Failed to retrieve posts' });
     }
 });
-
+/**este metodo cria um post */
 app.post('/posts', async (req, res) => {
     const content = req.body.content;
 
