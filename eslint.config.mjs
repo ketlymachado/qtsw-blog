@@ -16,6 +16,7 @@ export default [
       '@stylistic/ts/semi': ["error", "always"],
       '@stylistic/ts/indent': ["error", "tab"],
       "camelcase": ["error", { "properties": "always" }],
+      "no-magic-numbers": ["error", { "ignore": [0, 1, -1], "ignoreArrayIndexes": true }],
     }
   },
   pluginJs.configs.recommended,
