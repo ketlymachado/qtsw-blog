@@ -15,7 +15,8 @@ export default [
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
       'no-empty-function': "off",
-      '@typescript-eslint/no-empty-function': "error"
+      '@typescript-eslint/no-empty-function': "error",
+      'eslint no-use-before-define': "error"
     }
   },
   pluginJs.configs.recommended,

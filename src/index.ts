@@ -77,4 +77,19 @@ function funcaovazia() {
 };
 funcaovazia();
 
+//exemplo incorreto da regra: 'eslint no-use-before-define': "error"
+alert(a);
+var a = 10;
+
+{
+    alert(c);
+    let c = 1;
+}
+
+{
+    class C extends C {}
+}
+
+
+
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
