@@ -9,11 +9,15 @@ export default [
   {files: ["**/*.{js,mjs,cjs,ts}"]},
   {
     plugins: {
-      '@stylistic/ts': stylisticTs
+      '@stylistic/ts': stylisticTs,
+      sonarjs: sonarjs
     },
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      'sonarjs/cognitive-complexity': ["error", 15],
+      'sonarjs/no-duplicate-string': "warn",
+      'sonarjs/no-identical-expressions': "error"
     }
   },
   pluginJs.configs.recommended,
