@@ -3,10 +3,9 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import stylisticTs from '@stylistic/eslint-plugin-ts';
 
-
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts}"]},
+  { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
     plugins: {
       '@stylistic/ts': stylisticTs
@@ -14,6 +13,7 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      "no-console": "error" 
     }
   },
   pluginJs.configs.recommended,
