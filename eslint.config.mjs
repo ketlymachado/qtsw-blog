@@ -9,11 +9,17 @@ export default [
   {files: ["**/*.{js,mjs,cjs,ts}"]},
   {
     plugins: {
-      '@stylistic/ts': stylisticTs
+      '@stylistic/ts': stylisticTs,
+      'unused-imports': unusedImports
     },
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
+      ]
     }
   },
   pluginJs.configs.recommended,
