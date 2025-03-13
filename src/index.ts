@@ -27,6 +27,8 @@ app.post('/posts', async (req, res) => {
         return;
     }
 
+    const a = (5 * 9)
+
     try {
         let post = await prisma.post.create({
             data: { content }
