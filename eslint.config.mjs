@@ -15,11 +15,14 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      'no-empty-function': "off",
+      '@typescript-eslint/no-empty-function': "error",
+      '@typescript-eslint/no-use-before-define': "error",
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
         { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
-      ]
+      ],
     }
   },
   pluginJs.configs.recommended,
