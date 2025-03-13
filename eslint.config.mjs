@@ -10,7 +10,7 @@ export default [
   {
     plugins: {
       '@stylistic/ts': stylisticTs,
-      import: pluginImport,
+      'import': pluginImport,
     },
     languageOptions: { globals: globals.browser },
     rules: {
