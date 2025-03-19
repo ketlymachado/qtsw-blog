@@ -71,8 +71,6 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
-<<<<<<< HEAD
-=======
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
 
 const resultado: number = (10 + 5); // Erro: esses parênteses desnecessarios
@@ -95,8 +93,5 @@ var a = 10;
 {
     class C extends C {}
 }
->>>>>>> ffd8cc86c9f38afe2b0c2d52a2e55d56ab31d506
-
-
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
