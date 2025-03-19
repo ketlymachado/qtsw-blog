@@ -5,6 +5,7 @@ import path from 'path';
 const prisma = new PrismaClient();
 const app = express();
 const PORT = 3000;
+const content = "Olá Mundo";
 
 app.use(express.json())
 
