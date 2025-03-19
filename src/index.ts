@@ -71,9 +71,7 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
-console.log("Este log deve gerar um erro no ESLint!");
-console.warn("Este aviso também será bloqueado!");
-console.error("Isso aqui também será pego pelo ESLint!");
+
 
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
