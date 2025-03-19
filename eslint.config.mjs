@@ -3,7 +3,7 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import stylisticTs from '@stylistic/eslint-plugin-ts';
 import sonarjs from 'eslint-plugin-sonarjs';
-
+import unusedImports from 'eslint-plugin-unused-imports'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -11,10 +11,22 @@ export default [
   {
     plugins: {
       '@stylistic/ts': stylisticTs,
+      'unused-imports': unusedImports
     },
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      "@stylistic/ts/quotes": ["error", "double"],
+      "@stylistic/ts/indent": ["error", 2],
+      "@stylistic/ts/comma-dangle": ["error", "always-multiline"],
+      'no-empty-function': "off",
+      '@typescript-eslint/no-empty-function': "error",
+      '@typescript-eslint/no-use-before-define': "error",
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
+      ],
       '@stylistic/ts/indent': ["error", "tab"],
       "camelcase": ["error", { "properties": "always" }],
     }
