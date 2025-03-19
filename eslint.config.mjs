@@ -15,6 +15,10 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      "@stylistic/ts/quotes": ["error", "double"],
+      "@stylistic/ts/indent": ["error", 2],
+      "@stylistic/ts/comma-dangle": ["error", "always-multiline"],
+
       'no-empty-function': "off",
       '@typescript-eslint/no-empty-function': "error",
       '@typescript-eslint/no-use-before-define': "error",
