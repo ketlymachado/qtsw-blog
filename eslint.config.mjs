@@ -15,6 +15,8 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      '@stylistic/ts/indent': ["error", "tab"],
+      "camelcase": ["error", { "properties": "always" }],
     }
   },
   pluginJs.configs.recommended,
