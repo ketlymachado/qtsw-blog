@@ -9,7 +9,8 @@ export default [
   {files: ["**/*.{js,mjs,cjs,ts}"]},
   {
     plugins: {
-      '@stylistic/ts': stylisticTs
+      '@stylistic/ts': stylisticTs,
+      'unused-imports': unusedImports
     },
     languageOptions: { globals: globals.browser },
     rules: {
@@ -17,6 +18,16 @@ export default [
       "@stylistic/ts/quotes": ["error", "double"],
       "@stylistic/ts/indent": ["error", 2],
       "@stylistic/ts/comma-dangle": ["error", "always-multiline"],
+
+      'no-empty-function': "off",
+      '@typescript-eslint/no-empty-function': "error",
+      '@typescript-eslint/no-use-before-define': "error",
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
+      ],
+
     }
   },
   pluginJs.configs.recommended,
