@@ -18,7 +18,7 @@ app.get('/posts', async (req, res) => {
         res.status(500).json({ error: 'Failed to retrieve posts' });
     }
 });
-
+/**este metodo cria um post */
 app.post('/posts', async (req, res) => {
     const content = req.body.content;
 
@@ -33,7 +33,7 @@ app.post('/posts', async (req, res) => {
         });
         res.status(201).json(post);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to add post' });
+        res.status((500)).json({ error: 'Failed to add post' });
     }
 });
 
@@ -47,11 +47,11 @@ app.put('/posts/:id', async (req: Request, res: Response) => {
     }
   
     try {
-        const updatedpost = await prisma.post.update({
+        const updated_post = await prisma.post.update({
             where: { id: parseInt(id) },
             data: { content }
         });
-        res.json(updatedpost);
+        res.json(updated_post);
     } catch (error) {
         console.error('Error updating post:', error);
         res.status(500).json({ error: 'Failed to update post' });
@@ -70,5 +70,30 @@ app.delete('/posts/:id', async (req, res: Response) => {
         res.status(500).json({ error: 'Failed to delete post' });
     }
 });
+
+app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+
+const resultado: number = (10 + 5); // Erro: esses parênteses desnecessarios
+
+//exemplo da regra de função vazia do eslint
+function funcaovazia() {
+  
+};
+funcaovazia();
+
+//exemplo incorreto da regra: 'eslint no-use-before-define': "error"
+alert(a);
+var a = 10;
+
+{
+    alert(c);
+    let c = 1;
+}
+
+{
+    class C extends C {}
+}
+
+
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
