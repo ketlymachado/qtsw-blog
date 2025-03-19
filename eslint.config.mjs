@@ -27,7 +27,7 @@ export default [
         'warn',
         { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
       ],
-
+      '@stylistic/ts/indent': ["error", "tab"],
     }
   },
   pluginJs.configs.recommended,
