@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.get('/posts', async (req, res) => {
     try {
         let posts = await prisma.post.findMany();
+        let posts = [];
         res.json(posts);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve posts' });
@@ -71,8 +72,6 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
-
 const resultado: number = (10 + 5); // Erro: esses parênteses desnecessarios
 
 //exemplo da regra de função vazia do eslint
@@ -93,7 +92,5 @@ var a = 10;
 {
     class C extends C {}
 }
-
-
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))

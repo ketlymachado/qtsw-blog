@@ -16,6 +16,7 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
+      'no-redeclare': "error"
       "@stylistic/ts/quotes": ["error", "double"],
       "@stylistic/ts/indent": ["error", 2],
       "@stylistic/ts/comma-dangle": ["error", "always-multiline"],
@@ -34,7 +35,6 @@ export default [
       "no-magic-numbers": ["error", { "ignore": [0, 1, -1], "ignoreArrayIndexes": true }],
       '@stylistic/ts/lines-around-comment': ["error", { "beforeLineComment": true }],
       '@stylistic/ts/no-extra-parens': ["error", "all", { "conditionalAssign": false }],
-
     }
   },
   pluginJs.configs.recommended,
