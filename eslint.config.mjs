@@ -32,8 +32,11 @@ export default [
       '@stylistic/ts/indent': ["error", "tab"],
       "camelcase": ["error", { "properties": "always" }],
       "no-magic-numbers": ["error", { "ignore": [0, 1, -1], "ignoreArrayIndexes": true }],
+      '@stylistic/ts/lines-around-comment': ["error", { "beforeLineComment": true }],
+      '@stylistic/ts/no-extra-parens': ["error", "all", { "conditionalAssign": false }],
+
     }
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-]
+];
