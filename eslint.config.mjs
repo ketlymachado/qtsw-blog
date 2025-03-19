@@ -11,13 +11,10 @@ export default [
   {
     plugins: {
       '@stylistic/ts': stylisticTs,
-      'sonarjs': sonarjs
     },
     languageOptions: { globals: globals.browser },
     rules: {
       '@stylistic/ts/semi': ["error", "always"],
-      'no-trailing-spaces': ["error"],
-      'sonarjs/no-duplicate-string': ["error"],
     }
   },
   pluginJs.configs.recommended,
