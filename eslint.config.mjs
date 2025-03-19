@@ -7,7 +7,7 @@ import unusedImports from 'eslint-plugin-unused-imports'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts}"]},
+  { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
     plugins: {
       '@stylistic/ts': stylisticTs,
@@ -34,7 +34,7 @@ export default [
       "no-magic-numbers": ["error", { "ignore": [0, 1, -1], "ignoreArrayIndexes": true }],
       '@stylistic/ts/lines-around-comment': ["error", { "beforeLineComment": true }],
       '@stylistic/ts/no-extra-parens': ["error", "all", { "conditionalAssign": false }],
-
+      "no-console": "error" 
     }
   },
   pluginJs.configs.recommended,

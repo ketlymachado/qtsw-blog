@@ -94,6 +94,4 @@ var a = 10;
     class C extends C {}
 }
 
-
-
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
