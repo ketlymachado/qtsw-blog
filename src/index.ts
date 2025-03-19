@@ -71,6 +71,31 @@ app.delete('/posts/:id', async (req, res: Response) => {
     }
 });
 
+<<<<<<< HEAD
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
 
 const resultado: number = (10 + 5); // Erro: esses parênteses desnecessarios
+
+//exemplo da regra de função vazia do eslint
+function funcaovazia() {
+  
+};
+funcaovazia();
+
+//exemplo incorreto da regra: 'eslint no-use-before-define': "error"
+alert(a);
+var a = 10;
+
+{
+    alert(c);
+    let c = 1;
+}
+
+{
+    class C extends C {}
+}
+
+
+
+app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+>>>>>>> f0cd29cd2f58201afa330800012c7596eeb9e953
