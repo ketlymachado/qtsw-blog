@@ -90,6 +90,7 @@
             }
             button {
                 padding: 10px 20px;
+                margin-top: 10px;
                 background: #28a745;
                 color: white;
                 border: none;
@@ -99,15 +100,25 @@
             button:hover {
                 background: #218838;
             }
+            /* Contador de caracteres dentro do campo */
+            #charCount {
+                
+                
+                bottom: 5px;
+                font-size: 12px;
+                color: #aaa;
+            }
         </style>
     </head>
     <body>
         <h1>Blog de QTSW</h1>
 
         <form id="postForm">
-            <input type="text" id="content" placeholder="Digite sua postagem" required>
-            <button type="submit">Adicionar</button>
-        </form>
+        <div style="position: relative;">
+            <input type="text" id="content" placeholder="Digite sua postagem" required maxlength="100">
+            <span id="charCount">0/100 caracteres</span>
+        </div>
+        <button type="submit">Adicionar</button>
 
         <div id="posts">
             <!-- posts will be dynamically inserted here -->
@@ -221,10 +232,30 @@
                 if (content) {
                     await addPost(content);
                     document.getElementById('content').value = '';
+                    // Zerar o contador de caracteres
+                    document.getElementById('charCount').textContent = '0/250 caracteres';
                 }
             });
 
             fetchPosts()
+
+
+            document.getElementById('content').addEventListener('input', function () {
+            const contentLength = this.value.length;
+            const maxLength = 100;
+            const charCount = document.getElementById('charCount');
+            
+            // Atualiza o contador de caracteres
+            charCount.textContent = `${contentLength}/${maxLength} caracteres`;
+
+            
+            if (contentLength >= maxLength) {
+                this.value = this.value.slice(0, maxLength); 
+            }
+        });
+
+                
+
         </script>
     </body>
 </html>
