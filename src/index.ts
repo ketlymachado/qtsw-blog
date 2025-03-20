@@ -1,99 +1,83 @@
-import express, { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
-import path from 'path';
+import express, { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
+import path from "path";
 
 const prisma = new PrismaClient();
 const app = express();
 const PORT = 3000;
 
-app.use(express.json())
+app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../public')))
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.get('/posts', async (req, res) => {
-    try {
-        let posts = await prisma.post.findMany();
-        res.json(posts);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to retrieve posts' });
-    }
+app.get("/posts", async (req, res) => {
+	try {
+		const posts = await prisma.post.findMany();
+		res.json(posts);
+	} catch (error) {
+		const internalServerError = 500;
+		res.status(internalServerError).json({ error });
+	}
 });
+
 /**este metodo cria um post */
-app.post('/posts', async (req, res) => {
-    const content = req.body.content;
+app.post("/posts", async (req, res) => {
+	const content = req.body.content;
 
-    if (!content) {
-        res.status(400).json({ error: 'Content is required' });
-        return;
-    }
+	if (!content) {
+		const BadRequest = 400;
+		res.status(BadRequest).json({ error: "Content is required" });
+		return;
+	}
 
-    try {
-        let post = await prisma.post.create({
-            data: { content }
-        });
-        res.status(201).json(post);
-    } catch (error) {
-        res.status((500)).json({ error: 'Failed to add post' });
-    }
+	try {
+		const post = await prisma.post.create({
+			data: { content },
+		});
+		const success = 201;
+		res.status(success).json(post);
+	} catch (error) {
+		const internalServerError = 500;
+		res.status(internalServerError).json({ error });
+	}
 });
 
-app.put('/posts/:id', async (req: Request, res: Response) => {
-    const { id } = req.params;
-    let content = req.body.content
+app.put("/posts/:id", async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const content = req.body.content;
 
-    if (!content) {
-        res.status(400).json({ error: 'Content is required' });
-        return;
-    }
+	if (!content) {
+		const BadRequest = 400;
+		res.status(BadRequest).json({ error: "Content is required" });
+		return;
+	}
   
-    try {
-        const updated_post = await prisma.post.update({
-            where: { id: parseInt(id) },
-            data: { content }
-        });
-        res.json(updated_post);
-    } catch (error) {
-        console.error('Error updating post:', error);
-        res.status(500).json({ error: 'Failed to update post' });
-    }
+	try {
+		const updatedPost = await prisma.post.update({
+			where: { id: parseInt(id) },
+			data: { content },
+		});
+		res.json(updatedPost);
+	} catch (error) {
+		const internalServerError = 500;
+		console.error("Error updating post:", error);
+		res.status(internalServerError).json({ error: "Failed to update post" });
+	}
 });
 
-app.delete('/posts/:id', async (req, res: Response) => {
-    const { id } = req.params;
-    try {
-        await prisma.post.delete({
-            where: { id: parseInt(id) },
-        });
-        res.status(204).send();
-    } catch (error) {
-        console.error('Error deleting post:', error);
-        res.status(500).json({ error: 'Failed to delete post' });
-    }
+app.delete("/posts/:id", async (req, res: Response) => {
+	const { id } = req.params;
+	try {
+		await prisma.post.delete({
+			where: { id: parseInt(id) },
+		});
+		const noContent = 500;
+		res.status(noContent).send();
+	} catch (error) {
+		const internalServerError = 500;
+		console.error("Error deleting post:", error);
+		res.status(internalServerError).json({ error: "Failed to delete post" });
+	}
 });
 
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
-
-const resultado: number = (10 + 5); // Erro: esses parênteses desnecessarios
-
-//exemplo da regra de função vazia do eslint
-function funcaovazia() {
-  
-};
-funcaovazia();
-
-//exemplo incorreto da regra: 'eslint no-use-before-define': "error"
-alert(a);
-var a = 10;
-
-{
-    alert(c);
-    let c = 1;
-}
-
-{
-    class C extends C {}
-}
-
-
-
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
