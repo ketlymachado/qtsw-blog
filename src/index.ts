@@ -5,6 +5,7 @@ import path from "path";
 const prisma = new PrismaClient();
 const app = express();
 const PORT = 3000;
+const LIMIT_PER_PAGE = 5;
 
 app.use(express.json());
 
@@ -13,13 +14,13 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/posts", async (req, res) => {
 	try {
 		const page = Number(req.query.page) || 1; 
-        const limit = Number(req.query.limit) || 5;
-        const skip = (page - 1) * limit;  
+		const limit = Number(req.query.limit) || LIMIT_PER_PAGE;
+		const skip = (page - 1) * limit;  
 
 		const posts = await prisma.post.findMany({
-            skip: skip,
-            take: limit,
-        });
+			skip: skip,
+			take: limit,
+		});
 
 		const totalPosts = await prisma.post.count();
 
