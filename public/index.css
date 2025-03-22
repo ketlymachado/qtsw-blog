@@ -1,0 +1,128 @@
+:root {
+    --primary-color: #28a745;
+    --primary-hover: #218838;
+    --warning-color: #ffc107;
+    --warning-hover: #e0a800;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --neutral-light: #f4f4f4;
+    --neutral-dark: #333;
+    --border-color: #ccc;
+    --gray-color: #6c757d;
+    --gray-hover: #5a6268;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: var(--neutral-dark);
+}
+
+#posts {
+    margin-top: 20px;
+}
+
+.post {
+    background: var(--neutral-light);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+}
+
+.post-content {
+    flex-grow: 1;
+}
+
+.post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button, .delete-button {
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background: var(--warning-color);
+    color: black;
+}
+
+.edit-button:hover {
+    background: var(--warning-hover);
+}
+
+.delete-button {
+    background: var(--danger-color);
+    color: white;
+}
+
+.delete-button:hover {
+    background: var(--danger-hover);
+}
+
+.edit-form {
+    display: none;
+    flex-grow: 1;
+}
+
+.edit-form input {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    flex-grow: 1;
+}
+
+.edit-form button {
+    padding: 5px 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-form button:hover {
+    background: var(--primary-hover);
+}
+
+.edit-form .cancel-button {
+    background: var(--gray-color);
+}
+
+.edit-form .cancel-button:hover {
+    background: var(--gray-hover);
+}
+
+form:not(.edit-form) {
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
