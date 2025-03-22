@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import path from "path";
+import { StatusCodes } from "http-status-codes";
 
 const prisma = new PrismaClient();
 const app = express();
@@ -15,18 +16,16 @@ app.get("/posts", async (req, res) => {
 		const posts = await prisma.post.findMany();
 		res.json(posts);
 	} catch (error) {
-		const internalServerError = 500;
-		res.status(internalServerError).json({ error });
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.json({ error: "Failed to retrieve posts", message: error });
 	}
 });
 
-/**este metodo cria um post */
 app.post("/posts", async (req, res) => {
 	const content = req.body.content;
 
 	if (!content) {
-		const BadRequest = 400;
-		res.status(BadRequest).json({ error: "Content is required" });
+		res.status(StatusCodes.BAD_REQUEST).json({ error: "Content is required" });
 		return;
 	}
 
@@ -34,11 +33,10 @@ app.post("/posts", async (req, res) => {
 		const post = await prisma.post.create({
 			data: { content },
 		});
-		const success = 201;
-		res.status(success).json(post);
+		res.status(StatusCodes.CREATED).json(post);
 	} catch (error) {
-		const internalServerError = 500;
-		res.status(internalServerError).json({ error });
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.json({ error: "Failed to add post", message: error });
 	}
 });
 
@@ -47,8 +45,7 @@ app.put("/posts/:id", async (req: Request, res: Response) => {
 	const content = req.body.content;
 
 	if (!content) {
-		const BadRequest = 400;
-		res.status(BadRequest).json({ error: "Content is required" });
+		res.status(StatusCodes.BAD_REQUEST).json({ error: "Content is required" });
 		return;
 	}
   
@@ -59,9 +56,8 @@ app.put("/posts/:id", async (req: Request, res: Response) => {
 		});
 		res.json(updatedPost);
 	} catch (error) {
-		const internalServerError = 500;
 		console.error("Error updating post:", error);
-		res.status(internalServerError).json({ error: "Failed to update post" });
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update post" });
 	}
 });
 
@@ -71,12 +67,10 @@ app.delete("/posts/:id", async (req, res: Response) => {
 		await prisma.post.delete({
 			where: { id: parseInt(id) },
 		});
-		const noContent = 500;
-		res.status(noContent).send();
+		res.status(StatusCodes.NO_CONTENT).send();
 	} catch (error) {
-		const internalServerError = 500;
 		console.error("Error deleting post:", error);
-		res.status(internalServerError).json({ error: "Failed to delete post" });
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to delete post" });
 	}
 });
 
