@@ -1,0 +1,11 @@
+// Este código deve gerar um erro no ESLint devido à regra "no-shadow"
+function exemplo() {
+    let valor = 10;
+    if (true) {
+        let valor = 20; // 🚨 Isso deve gerar um erro, pois está sombreando a variável de escopo superior
+        console.log(valor);
+    }
+    console.log(valor);
+}
+
+exemplo();

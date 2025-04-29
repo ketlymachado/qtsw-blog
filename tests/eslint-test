@@ -1,0 +1,4 @@
+// Este código deve gerar um erro no ESLint devido à regra "no-console"
+console.log("Esta mensagem de log não é permitida!"); // 🚨 Isso deve gerar um erro
+console.warn("Este aviso é permitido."); // ✅ Permitido
+console.error("Este erro também é permitido."); // ✅ Permitido
